@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const ContactController = require("./ContactController");
 
 module.exports = class MenuController {
     constructor(){
@@ -14,11 +15,30 @@ module.exports = class MenuController {
 	        ]
 	      }
 	    ];
-	    this.contacts = [];
+	    this.book = new ContactController();
+	    this.addContactQuestions = [
+    	{
+          type: "input",
+          name: "name",
+          message: "Contact's name - ",
+          validate(val){
+            return val !== "";
+          }
+    	},
+        {
+          type: "input",
+          name: "phone",
+          message: "Contact's phone number - ",
+          validate(val){
+            return val !== "";
+          }
+        }
+      ];
     }
+    
 
     main(){
-      console.log(`Welcome to AddressBloc! You have ${this.contacts.length} contacts.`);
+      console.log(`Welcome to AddressBloc! You have ${this.book.contacts.length} entries.`);
       inquirer.prompt(this.mainMenuQuestions).then((response) => {
         switch(response.mainMenuChoice){
           case "Add new contact":
@@ -45,8 +65,15 @@ module.exports = class MenuController {
 
     addContact(){
       this.clear();
-      console.log('addContact called');
-      this.main();
+      inquirer.prompt(this.book.addContactQuestions).then((answers) => {
+       this.book.addContact(answers.name, answers.phone).then((contact) => {
+         console.log("Contact added successfully!");
+         this.main();
+       }).catch((err) => {
+         console.log(err);
+         this.main();
+       });
+     });
     }
 
     getDate(){
