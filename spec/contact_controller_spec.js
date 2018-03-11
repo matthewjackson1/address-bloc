@@ -1,15 +1,18 @@
 process.env.NODE_ENV = "test";
+const sequelize = require("../db/models/index").sequelize;
 const ContactController = require('../controllers/ContactController');
 
-const sequelize = require("../db/models/index").sequelize;
 
 
 describe('ContactController', () => {
+  it("should be defined", () => {
+      expect(ContactController).toBeDefined();
+    });
+
   let book;
 
   beforeEach(() => {
     book =  new ContactController;
-    console.log("complete");
   });
 
   afterEach(() => {
@@ -22,18 +25,17 @@ describe('ContactController', () => {
 
   describe("#addContact()", () => {
       it("should add a single contact into the book", (done) => {
-        book.addContact("Alice", "001-101-1010").then((contact) => {
+          book.addContact("Alice", "001-101-1010","alice@gmail.com").then((contact) => {
           expect(contact.name).toBe("Alice");
           expect(contact.phone).toBe("001-101-1010");
+          expect(contact.email).toBe("alice@gmail.com");
           done();
         }).catch((err) => {
           done();
         });
       });
 
-
-      });
-
-    });
+  });
+});
 
 

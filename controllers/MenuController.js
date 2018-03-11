@@ -32,6 +32,14 @@ module.exports = class MenuController {
           validate(val){
             return val !== "";
           }
+        },
+        {
+          type: "input",
+          name: "email",
+          message: "Contact's email address - ",
+          validate(val){
+            return val !== "";
+          }
         }
       ];
     }
@@ -66,13 +74,13 @@ module.exports = class MenuController {
     addContact(){
       this.clear();
       inquirer.prompt(this.book.addContactQuestions).then((answers) => {
-       this.book.addContact(answers.name, answers.phone).then((contact) => {
+         this.book.addContact(answers.name, answers.phone, answers.email).then((contact) => {
          console.log("Contact added successfully!");
          this.main();
        }).catch((err) => {
          console.log(err);
          this.main();
-       });
+       })
      });
     }
 
