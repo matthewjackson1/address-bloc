@@ -16,37 +16,12 @@ module.exports = class MenuController {
 	      }
 	    ];
 	    this.book = new ContactController();
-	    this.addContactQuestions = [
-    	{
-          type: "input",
-          name: "name",
-          message: "Contact's name - ",
-          validate(val){
-            return val !== "";
-          }
-    	},
-        {
-          type: "input",
-          name: "phone",
-          message: "Contact's phone number - ",
-          validate(val){
-            return val !== "";
-          }
-        },
-        {
-          type: "input",
-          name: "email",
-          message: "Contact's email address - ",
-          validate(val){
-            return val !== "";
-          }
-        }
-      ];
+	    
     }
     
 
     main(){
-      console.log(`Welcome to AddressBloc! You have ${this.book.contacts.length} entries.`);
+      console.log('Welcome to AddressBloc! You have ${this.book.contacts.length} entries.');
       inquirer.prompt(this.mainMenuQuestions).then((response) => {
         switch(response.mainMenuChoice){
           case "Add new contact":
