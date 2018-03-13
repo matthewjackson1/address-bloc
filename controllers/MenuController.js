@@ -21,7 +21,7 @@ module.exports = class MenuController {
     
 
     main(){
-      console.log('Welcome to AddressBloc! You have ${this.book.contacts.length} entries.');
+      console.log(`Welcome to AddressBloc! You have ${this.book.contacts.length} entries.`);
       inquirer.prompt(this.mainMenuQuestions).then((response) => {
         switch(response.mainMenuChoice){
           case "Add new contact":
@@ -48,6 +48,7 @@ module.exports = class MenuController {
 
     addContact(){
       this.clear();
+      
       inquirer.prompt(this.book.addContactQuestions).then((answers) => {
          this.book.addContact(answers.name, answers.phone, answers.email).then((contact) => {
          console.log("Contact added successfully!");
