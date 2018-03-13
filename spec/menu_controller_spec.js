@@ -11,7 +11,7 @@ describe('MenuController', () => {
         expect(menu.getContactCount()).toBe(0);
       });
       it('should return 1 when there is exactly one contact in the book', () => {
-	    menu.book.addContact("Bob", "555-555-5555");
+	    menu.book.addContact("Bob", "555-555-5555", "bob@gmail.com");
 	    expect(menu.getContactCount()).toBe(1)
    	  });
     });

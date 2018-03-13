@@ -15,7 +15,7 @@ describe('ContactController', () => {
     book =  new ContactController;
   });
 
-  afterEach(() => {
+  afterEach((done) => {
       sequelize.sync({force: true}).then((res) => {
       done();
     }).catch((err) => {

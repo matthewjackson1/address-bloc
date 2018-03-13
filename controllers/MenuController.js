@@ -17,32 +17,6 @@ module.exports = class MenuController {
 	      }
 	    ];
 	    this.book = new ContactController();
-	    this.addContactQuestions = [
-    	{
-          type: "input",
-          name: "name",
-          message: "Contact's name - ",
-          validate(val){
-            return val !== "";
-          }
-    	},
-        {
-          type: "input",
-          name: "phone",
-          message: "Contact's phone number - ",
-          validate(val){
-            return val !== "";
-          }
-        },
-        {
-          type: "input",
-          name: "email",
-          message: "Contact's email address - ",
-          validate(val){
-            return val !== "";
-          }
-        }
-      ];
 
     this.searchQuestions = [
       {
@@ -54,6 +28,7 @@ module.exports = class MenuController {
         }
       }
     ];
+
     }
     
 
@@ -90,6 +65,7 @@ module.exports = class MenuController {
 
     addContact(){
       this.clear();
+      
       inquirer.prompt(this.book.addContactQuestions).then((answers) => {
          this.book.addContact(answers.name, answers.phone, answers.email).then((contact) => {
          console.log("Contact added successfully!");
